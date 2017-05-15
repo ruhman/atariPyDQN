@@ -10,7 +10,11 @@ class Environment:
         self.display = params.display
         self.terminal = False
         self.dims = (params.height, params.width)
-        # self.metadata = params.metadata
+        self.metadata = self.gym.metadata
+        self.action_space=self.gym.action_space.n
+        self.observation_space=self.gym.observation_space
+        self.reward_range = self.gym.reward_range
+        self.spec = self.gym.spec
 
     def actions(self):
         return self.gym.action_space.n

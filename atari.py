@@ -46,6 +46,7 @@ testarg.add_argument("--ckpt_dir", type=str, default='model', help="Tensorflow c
 testarg.add_argument("--out", help="Output directory for gym.")
 testarg.add_argument("--episodes", type=int, default=100, help="Number of episodes.")
 testarg.add_argument("--seed", type=int, help="Random seed.")
+testarg.add_argument("--metadata", type=object,default= {'render.modes':[]}, help="Random seed.")
 args = parser.parse_args()
 if args.seed:
     rand.seed(args.seed)
@@ -64,6 +65,7 @@ else:
 ##here we go...
 
 # initialize gym environment and dqn
+# args.metadata = {'render.modes':[]}
 env = Environment(args)
 agent = DQN(env, args)
 
@@ -72,6 +74,10 @@ Trainer(agent).run()
 
 # play the game
 # env.gym.monitor.start(args.out, force=True)
-env = gym.wrappers.Monitor(env, args.out)
+# env.metadata = {'render.modes':[]}
+# env.action_space=None
+# args.out.metadata={'render.modes':[]}
+env = gym.wrappers.Monitor(env, args.out,force=True)
 agent.play()
-env.gym.monitor.close()
+env.close()
+gym.upload('/Users/daniruhman/Downloads/Game-AI-master/gym-out/SpaceInvaders-v0')
