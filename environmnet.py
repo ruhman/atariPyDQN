@@ -7,7 +7,7 @@ class Environment:
         self.gym = gym.make(parameter_list.game) # inicializa o gym, responsável por admistrar nosso aprendizado
         self.displayTesting = params.displayTesting # decide se deve mostrar um display do processo
         self.displayResult = params.displayResult
-        self.terminal # guarda logs do gym
+        self.terminal = False
         self.dimensions = (params.height, params.width)
         self.currentObservation = None
         
@@ -23,9 +23,8 @@ class Environment:
 
     def restart(self):
         self.currentObservation = self.gym.reset()
+        self.terminal = False
 
-
-    # Função responsável por calcular a recompensa e a observação do momento atual
     def act(self, action):
         if self.displayTesting:
             self.gym.render()
@@ -38,7 +37,7 @@ class Environment:
         return reward
 
     def getScreen(self):
-        return cv2.resize(cv2.cvtColor(self.observation, cv2.COLOR_RGB2GRAY), self.dims)
+        return cv2.resize(cv2.cvtColor(self.currentObservation, cv2.COLOR_RGB2GRAY), self.dimensions)
 
     def isTerminal(self):
         return self.terminal
