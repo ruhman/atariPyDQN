@@ -64,7 +64,7 @@ else:
 
 ##here we go...
 
-# initialize gym environment and dqn
+# inicializa nosso enviroment
 # args.metadata = {'render.modes':[]}
 env = Environment(args)
 agent = DQN(env, args)
