@@ -41,3 +41,4 @@ class Environment:
 
     def isTerminal(self):
         return self.terminal
+        
