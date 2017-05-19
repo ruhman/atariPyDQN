@@ -67,7 +67,6 @@ else:
 ##here we go...
 
 # inicializa nosso enviroment
-# args.metadata = {'render.modes':[]}
 env = Environment(args)
 agent = DQN(env, args)
 
@@ -75,11 +74,9 @@ agent = DQN(env, args)
 Trainer(agent).run()
 
 # play the game
-# env.gym.monitor.start(args.out, force=True)
-# env.metadata = {'render.modes':[]}
-# env.action_space=None
-# args.out.metadata={'render.modes':[]}
-env = gym.wrappers.Monitor(env, args.out,force=True)
+env = gym.wrappers.Monitor(env, args.out,video_callable=lambda episode_id: episode_id%10==0,force=True)
+print("opa")
 agent.play()
+print("opa1")
 env.close()
-# gym.upload('/Users/marceloprado/atariPyDQN/gym-out/SpaceInvaders-v0')
+gym.upload('/Users/daniruhman/Downloads/atariPyDQN/gym-out/SpaceInvaders-v0/',api_key="sk_38r7JkrtRbCqU5vjq6aK6g")

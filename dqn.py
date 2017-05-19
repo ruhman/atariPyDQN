@@ -132,10 +132,10 @@ class DQN:
     def play(self):
         self.randomRestart()
         self.env.restart()
+        print(self.episodes)
         for i in xrange(self.episodes):
             terminal = False
             while not terminal:
-                #aca cambie algo
                 state, action, reward, screen, terminal = self.observe(self.eps)
 
     def copy_weights(self, sess):
